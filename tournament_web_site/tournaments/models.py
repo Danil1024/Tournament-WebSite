@@ -42,11 +42,12 @@ class TeamRegistration(models.Model):
         verbose_name_plural = 'Заявки в команды'
 
 class TournamentRegistration(models.Model):
+    CHOICES_STATUS = (('pending', 'ожидание'), ('pending payment', 'ожидание оплаты'), ('payment confirmed', 'подтверждения оплаты'), ('payment confirmed', 'оплата подтверждена'))
     tournament = models.ForeignKey(Tournament, verbose_name='Турнир', on_delete=models.CASCADE)
     team = models.OneToOneField(Team, verbose_name='Команда', on_delete=models.CASCADE)
     date = models.DateTimeField(verbose_name='Дата подачи заявки', auto_now_add=True)
     created_by = models.ForeignKey(get_user_model(), verbose_name='Модератор', on_delete=models.CASCADE)
-    status = models.CharField(verbose_name='Статус', max_length=20, choices=(('ожидание', '1'), ('ожидание оплаты', '2'), ('подтверждения оплаты', '3'), ('оплата подтверждена', '4')))
+    status = models.CharField(verbose_name='Статус', max_length=20, choices=CHOICES_STATUS)
     
     class Meta:
         verbose_name = 'Заявка на турнир'
