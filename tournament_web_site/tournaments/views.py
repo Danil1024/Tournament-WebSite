@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Tournament
 
-# Create your views here.
+class MainPage(ListView):
+    model = Tournament
+    template_name = "tournaments/main_page.html"
+    context_object_name = "tournaments"
+    ordering = ['-creation_date']

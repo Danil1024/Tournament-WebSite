@@ -1,12 +1,17 @@
 from django.db import models
 from games.models import Game
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from datetime import timedelta
+from django.db.models import F, Q
+from django.db.models.constraints import CheckConstraint
 
 
 class Tournament(models.Model):
     CHOICES_TEAM_SIZE = (('1', 'solo'), ('2', 'duo'), ('3', 'trio'), ('4', 'squad'), ('5', 'FULL'))
     game = models.ForeignKey(Game, verbose_name='Игра', on_delete=models.CASCADE)
-    registration_start_date = models.DateTimeField(verbose_name='Дата начала регистрации', auto_now_add=True)
+    creation_date = models.DateTimeField(verbose_name='Дата создания турнира', auto_now_add=True)
+    registration_start_date = models.DateTimeField(verbose_name='Дата начала регистрации')
     start_date = models.DateTimeField(verbose_name='Дата начала турнира')
     team_size = models.CharField(verbose_name='Размер команды', max_length=1, choices=CHOICES_TEAM_SIZE)
     maximum_number_of_teams = models.PositiveIntegerField(verbose_name='Максимальное количество команд')
@@ -18,6 +23,17 @@ class Tournament(models.Model):
     class Meta:
         verbose_name = 'Турнир'
         verbose_name_plural = 'Турниры'
+
+        constraints = [
+            CheckConstraint(
+                check=Q(start_date__gte=F('registration_start_date')),
+                name='start_date_after_or_equal_to_registration_start_date'
+            ),
+            CheckConstraint(
+                check=Q(start_date__gte=F('registration_start_date') + timedelta(days=1)),
+                name='min_1_day_between_registration_and_start'
+            )
+        ]
 
 class Team(models.Model):
     name = models.CharField(verbose_name='Название', max_length=100)

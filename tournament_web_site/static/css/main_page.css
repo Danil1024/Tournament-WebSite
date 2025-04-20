@@ -1,0 +1,390 @@
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(
+    130deg,
+    #171b22 18.92%,
+    #3a4354 62.3%,
+    #7789ab 95.5%
+  );
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.sidebar {
+  background-color: black;
+  width: 240px;
+}
+
+.content {
+  flex: 1;
+}
+
+.header {
+  background-color: #3a4354;
+  padding: 19px 2.5em 19px 1.5em;
+  border-radius: 20px; /* Закругление углов */
+  margin-bottom: 20px; /*Отступ снизу */
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  border: 0.5px solid #7789ab;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
+  /* width: 80rem; */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15rem; /* Отступ между заголовком и навигацией */
+}
+
+.header-nav-text ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 80px;
+  border-left: 40px;
+}
+
+.logos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.button_log_reg {
+  background-color: transparent;
+  border: none;
+}
+
+.header nav a {
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 330;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  letter-spacing: 0.6px;
+  position: relative; /* Важно для позиционирования псевдоэлемента */
+  text-decoration: none; /* Убирает стандартное подчеркивание, если оно есть */
+}
+
+.nav-a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -35px;
+  width: 100%;
+  height: 3px;
+  background-color: #c7f022; /* цвет линии */
+  opacity: 0; /* Изначально линия невидима */
+  transition: opacity 0.5s ease; /* добавляем transition для плавности изменения ширины */
+}
+
+.nav-a:hover::after {
+  opacity: 1; /* При наведении линия становится видимой */
+}
+
+.container-preview {
+  margin-top: 135px;
+  display: flex; /* Включаем flexbox */
+  align-items: center; /* Выравнивание по вертикали по центру */
+  position: relative; /* Контейнер будет относительным, для позиционирования дочерних элементов */
+}
+
+.text-preview {
+  flex: 1; /* Текст будет занимать оставшееся пространство */
+  padding-right: 500px; /* Можно добавить отступ между текстом и картинкой */
+  padding-left: 180px;
+  z-index: 2;
+  font-family: Manrope;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 85px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.text-preview h1 {
+  margin-bottom: 0;
+}
+
+.text-preview span {
+  color: #c7f022;
+}
+
+.text-preview p {
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.2px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.img-preview {
+  position: relative;
+}
+
+.img-preview img {
+  max-width: 990px; /* Ограничение ширины картинки */
+  height: auto; /* Автоматическая высота */
+  position: absolute; /* Абсолютное позиционирование */
+  right: 0; /* Прижимаем картинку к правому краю */
+  z-index: 1;
+  bottom: -572px;
+}
+
+.luminosity-filter {
+  mix-blend-mode: luminosity;
+}
+
+.last-tournaments {
+  margin-top: 490px;
+  margin-right: 20px;
+  margin-left: 20px;
+  min-height: 50px;
+  text-align: center;
+}
+
+.last-tournaments h1 {
+  margin-top: 0;
+  font-family: Manrope;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 85px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 0;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table-head-string {
+  display: flex; /* Включаем flexbox */
+  width: 95%;
+  color: white;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 19.36px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  letter-spacing: 0.6px;
+  margin-left: 35px;
+}
+
+.table-head-string div:nth-child(1) {
+  width: 10%;
+  /* margin-left: 15px; */
+}
+
+.table-head-string div:nth-child(2) {
+  width: 31%;
+  /* margin-left: 200px; */
+}
+
+.table-head-string div:nth-child(3) {
+  /* margin-left: 200px; */
+  width: 16%;
+}
+
+.table-head-string div:nth-child(4) {
+  /* padding-left: 80px; */
+  width: 13%;
+}
+
+.table-head-string div:nth-child(5) {
+  /* padding-left: 120px; */
+  width: 17%;
+}
+
+.table-body-string {
+  display: flex; /* Включаем flexbox */
+  align-items: center;
+  background-color: #3a43544d;
+  border-radius: 20px; /* Закругление углов */
+  margin-bottom: 20px; /*Отступ снизу */
+  margin-top: 20px;
+  padding-left: 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  border: 0.5px solid #7789ab;
+  min-height: 50px;
+
+  color: #ffffff;
+
+  font-family: Inter;
+  font-weight: 270;
+  font-size: 17.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.table-body div:last-child {
+  margin-bottom: 0px;
+}
+
+.table-body-string img {
+  display: block;
+  margin: 0 auto;
+}
+
+.green-button {
+  background-color: rgba(28, 28, 28, 0);
+  border: 0.5px solid #c7f022;
+  border-radius: 20px;
+  color: #c7f022;
+  padding: 16px 38px 16px 38px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 470;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  z-index: 2;
+}
+
+.table-body-string div:nth-child(1) {
+  width: 10%;
+  /* max-width: 420px;  */
+}
+
+.table-body-string div:nth-child(2) {
+  width: 34%;
+  /* max-width: 420px;  */
+}
+
+.table-body-string div:nth-child(3) {
+  width: 16%;
+}
+
+.table-body-string div:nth-child(4) {
+  width: 15%;
+}
+
+.table-body-string div:nth-child(5) {
+  width: 17%;
+}
+
+.img-lines {
+  position: relative;
+}
+
+.img-lines img {
+  position: absolute; /* Абсолютное позиционирование */
+  z-index: -1;
+  height: auto;
+  width: auto;
+}
+
+.block-show-more {
+  margin-top: 40px;
+  text-align: center;
+}
+
+footer {
+  display: flex; /* Включаем flexbox */
+  /* align-items: center; */
+  background-color: #272e39;
+  border-radius: 20px; /* Закругление углов */
+  margin-bottom: 20px; /*Отступ снизу */
+  margin-right: 20px;
+  margin-top: 330px;
+  margin-left: 20px;
+  /* border: 0.5px solid #7789ab; */
+  min-height: 50px;
+  height: 298px;
+}
+
+.footer-left {
+  margin-top: 125px;
+  margin-left: 25px;
+}
+
+.footer-left p {
+  margin-top: 5px;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 19.36px;
+  letter-spacing: 0.1px;
+}
+
+.footer-nav {
+  margin-top: 40px;
+  margin-left: 192px;
+}
+.footer-nav h2 {
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 40px;
+  margin-top: 0px;
+  letter-spacing: 0.3px;
+}
+
+.footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-nav li {
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 16.94px;
+  text-align: left;
+  margin-top: 20px;
+  letter-spacing: 0.3px;
+}
+
+.footer-nav li a {
+  color: #ffffff;
+  text-decoration: none; /* Убирает стандартное подчеркивание, если оно есть */
+  text-decoration-skip-ink: none;
+}
+
+#footer-nav-company {
+  margin-left: 133px;
+}
+
+#footer-nav-social-media {
+  margin-left: 139px;
+}
+
+.logos-social-media img {
+  margin-right: 16px;
+}
