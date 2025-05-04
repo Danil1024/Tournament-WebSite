@@ -58,6 +58,12 @@ env.bak/
 venv.bak/
 
 # Pyre type checker
+
+# Игнорируем все SVG в media/icons
+tournament_web_site/media/icons/*.svg
+
+# Но НЕ игнорируем саму папку
+!tournament_web_site/media/icons/.gitkeep
 .pyre/
 .idea/*
 .env

@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Champion's Realm</title>
+  </head>
+  <body>
+    <div class="sidebar"></div>
+    <div class="content">
+      <header class="header">
+        <div class="header-left">
+          <img src="{% static 'img/logo_header.svg' %}" alt="logo_header" />
+          <nav class="header-nav-text">
+            <ul>
+              <li><a class="nav-a" href="#">Главная</a></li>
+              <li><a class="nav-a" href="#">Турниры</a></li>
+              <li><a class="nav-a" href="#">Дисциплины</a></li>
+              <li><a class="nav-a" href="#">О нас</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="header-right">
+          <nav class="logos">
+            <ul>
+              <li>
+                <a href="#"><img src="{% static 'img/saerch.svg' %}" alt="logo_saerch"/></a>
+              </li>
+                <button class="button_log_reg" id="buttonLogReg">
+                  <img src="{% static 'img/user.svg' %}" alt="logo_user" />
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <div class="container-preview">
+          <div class="text-preview">
+            <h1>
+              СОВЕРШЕНСТВУЙ <span>КИБЕРСПОРТ</span><br />
+              С НАМИ!
+            </h1>
+            <p>
+              <span>УЧАВСТВУЙ</span> И <span>СЛЕДИ</span> ЗА САМЫМИ<br />
+              НОВЫМИ ТУРНИРАМИ
+            </p>
+          </div>
+          <div class="img-preview">
+            <img
+              src="{% static 'img/hero_photos.svg' %}"
+              class="luminosity-filter"
+            />
+          </div>
+        </div>
+        <div class="last-tournaments">
+          <h1>АКТУАЛЬНЫЕ ТУРНИРЫ</h1>
+          <div class="table">
+            <div class="table-head">
+              <div class="table-head-string">
+                <div>Дисциплина</div>
+                <div>Турнир</div>
+                <div>Дата регистрации</div>
+                <div>Дата начала</div>
+                <div>Взнос</div>
+                <div></div>
+              </div>
+            </div>
+            <div class="table-body">
+              {% for tournament in tournaments|slice:":4" %}
+              <div class="table-body-string">
+                <div>
+                  <img
+                    src="{{MEDIA_URL}}{{tournament.game.icon.url}}"
+                    alt="game_icon"
+                  />
+                </div>
+                <div>{{tournament}}</div>
+                <div>{{tournament.registration_start_date|date:"d.m.Y"}}</div>
+                <div>{{tournament.start_date|date:"d.m.Y"}}</div>
+                <div>{{tournament.price}}</div>
+                <div>
+                  <a href="">
+                    <button class="green-button">УЧАСТВОВАТЬ</button>
+                  </a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="img-lines">
+          <img
+            src="{% static 'img/lines_photos.svg' %}"
+            class="luminosity-filter"
+          />
+        </div>
+        <div class="block-show-more">
+          <a href=""><button class="green-button">ПОКАЗАТЬ ЕЩЕ</button></a>
+        </div>
+      </main>
+      <footer>
+        <div class="footer-left">
+          <div>
+            <img
+              src="{% static 'img/logo_footer.svg' %}"
+              alt="logo_footer"
+              class="img-logo-footer"
+            />
+          </div>
+          <p>CHAMPION'S REALM</p>
+        </div>
+        <div class="footer-nav">
+          <h2>Навигация</h2>
+          <ul>
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">Турниры</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav" id="footer-nav-company">
+          <h2>Компания</h2>
+          <ul>
+            <li><a href="#">Помошь</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">О нас</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav" id="footer-nav-social-media">
+          <h2>Наши cоцсети</h2>
+          <div class="logos-social-media">
+            <a href="#"><img src="{% static 'img/instagram_logo.svg' %}" alt="instagram_logo"/></a>
+            <a href="#"><img src="{% static 'img/telegram_logo.svg' %}"alt="telegram_logo"/></a>
+            <a href="#"><img src="{% static 'img/vk_logo.svg' %}" alt="vk_logo" /></a>
+            <a href="#"><img src="{% static 'img/twich_logo.svg' %}" alt="twich_logo" /></a>
+            <a href="#"><img src="{% static 'img/discord_logo.svg' %}" alt="discord_logo" /></a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="sidebar"></div>
+    <script src="{% static 'js/main_page.js' %}"></script>
+  </body>
+</html>
