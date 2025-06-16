@@ -36,6 +36,9 @@ body {
   justify-content: space-between;
   align-items: center;
   min-height: 50px;
+
+  position: relative;
+  z-index: 4;
   /* width: 80rem; */
 }
 
@@ -319,6 +322,9 @@ footer {
   /* border: 0.5px solid #7789ab; */
   min-height: 50px;
   height: 298px;
+
+  position: relative;
+  z-index: 4;
 }
 
 .footer-left {

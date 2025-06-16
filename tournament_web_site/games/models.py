@@ -5,7 +5,8 @@ from django.core.validators import FileExtensionValidator
 class Game(models.Model):
     name = models.CharField(verbose_name='Название', max_length=100)
     icon = models.FileField(upload_to='./icons/', verbose_name='Иконка', validators=[FileExtensionValidator(['svg'])])
-
+    slug = models.SlugField(unique=True)
+    
     def __str__(self):
         return f'{self.name}'
     

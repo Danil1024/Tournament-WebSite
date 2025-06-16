@@ -8,7 +8,14 @@ from django.db.models.constraints import CheckConstraint
 
 
 class Tournament(models.Model):
-    CHOICES_TEAM_SIZE = (('1', 'solo'), ('2', 'duo'), ('3', 'trio'), ('4', 'squad'), ('5', 'FULL'))
+    CHOICES_TEAM_SIZE = (
+        ('1', 'solo'),
+        ('2', 'duo'),
+        ('3', 'trio'),
+        ('4', 'squad'),
+        ('5', 'full')
+    )
+    
     game = models.ForeignKey(Game, verbose_name='Игра', on_delete=models.CASCADE)
     creation_date = models.DateTimeField(verbose_name='Дата создания турнира', auto_now_add=True)
     registration_start_date = models.DateTimeField(verbose_name='Дата начала регистрации')
@@ -19,6 +26,10 @@ class Tournament(models.Model):
 
     def __str__(self):
         return f'{self.game} {self.get_team_size_display()} #{self.pk}'
+    
+    @classmethod
+    def get_team_size_map(cls):
+        return {label: value for value, label in cls.CHOICES_TEAM_SIZE}
     
     class Meta:
         verbose_name = 'Турнир'
