@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %}
+
+{% block title %}
+Champion's Realm ВХОД
+{% endblock %}
+
+{% block content %}
+<div class="form-content">
+  <form id="loginForm" class="form" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {{ form.username }}
+    {% if form.username.errors %}
+      <ul class="errorlist">
+        {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {{ form.password }}
+    {% if form.password.errors %}
+      <ul class="errorlist">
+        {% for error in form.password.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% comment %} <div class="remember-me-forgot-password">
+      <div class="remember-me">
+          {{ form.remember_me }}
+          <label for="{{ form.remember_me.id_for_label }}">Запомнить меня</label>
+      </div>
+    </div> {% endcomment %}
+    {% comment %} <a class="forgot-password" href="">Забыли пароль?</a> {% endcomment %}
+    <button type="submit">ВОЙТИ</button>
+    
+    <h5>Войти с помощью</h5>
+    <div class="login-with-icons">
+      <a><img src="{% static 'img/google_logo_for_form.svg' %}" /></a>
+      <a><img src="{% static 'img/vk_logo_for_form.svg' %}" /></a>
+      <a><img src="{% static 'img/discord_logo_for_form.svg' %}" /></a>
+    </div>
+  </form>
+</div>
+{% endblock %}
