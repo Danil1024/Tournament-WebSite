@@ -34,7 +34,7 @@
           <nav class="header-nav-text">
             <ul>
               <li><a class="nav-a" href="{% url 'main_page' %}">Главная</a></li>
-              <li><a class="nav-a" href="#">Турниры</a></li>
+              <li><a class="nav-a" href="{% url 'tournaments' %}">Турниры</a></li>
               <li><a class="nav-a" href="#">Дисциплины</a></li>
               <li><a class="nav-a" href="#">О нас</a></li>
             </ul>
@@ -119,5 +119,8 @@
     </div>
     <div class="sidebar"></div>
     <script src="{% static 'js/main_page.js' %}"></script>
+    {% block js %}
+      <!-- подключаем js страницы -->
+    {% endblock %}
   </body>
 </html>

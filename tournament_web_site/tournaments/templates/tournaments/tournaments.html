@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/tournaments.css' %}" />
+{% endblock %}
+
+{% block title %}
+Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class='tournament-filters'>
+  <div class="tournament-filter">
+    <button class='tournament-filter-button' id="TournamentFilterButton">
+      игры
+      <img src="{% static 'img/open_filter_icon_no_active.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+    </button>
+    <div class="tournament-filter-modal" id="TournamentFilterModal"></div>
+    <div class="tournament-filter-modal-content" id="TournamentFilterModalContent">
+      {% for game in games %}
+        <a href="{% url 'tournaments'%}?game={{game}}">
+          <div class="tournament-filter-modal-content-div">
+            {{game}}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="tournament-filter">
+    <button class='tournament-filter-button' id="TournamentFilterButton">
+      даты
+      <img src="{% static 'img/open_filter_icon_no_active.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+    </button>
+    <div class="tournament-filter-modal" id="TournamentFilterModal"></div>
+    
+    <div class="tournament-filter-modal-content" id="TournamentFilterModalContent">
+      {% for date in unique_dates %}
+        <a href="{% url 'tournaments'%}?date={{date|date:"Y-m-d"}}">
+          <div class="tournament-filter-modal-content-div">
+            {{date|date:"d.m.Y"}}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="tournament-filter">
+    <button class='tournament-filter-button' id="TournamentFilterButton">
+      кол-во игроков
+      <img src="{% static 'img/open_filter_icon_no_active.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+    </button>
+    <div class="tournament-filter-modal" id="TournamentFilterModal"></div>
+    <div class="tournament-filter-modal-content" id="TournamentFilterModalContent">
+      <a href="{% url 'tournaments'%}?team=solo">
+        <div class="tournament-filter-modal-content-div">
+          <img src="{% static 'img/solo_icon.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+          Solo
+        </div>
+      </a>
+
+      <a href="{% url 'tournaments'%}?team=duo">
+        <div class="tournament-filter-modal-content-div">
+          <img src="{% static 'img/duo_icon.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+          Duo
+        </div>
+      </a>
+      
+      <a href="{% url 'tournaments'%}?team=trio">
+        <div class="tournament-filter-modal-content-div">
+          <img src="{% static 'img/trio_icon.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+          Trio
+        </div>
+      </a>
+      <a href="{% url 'tournaments'%}?team=squad">
+        <div class="tournament-filter-modal-content-div">
+          <img src="{% static 'img/squad_icon.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+          Squad
+        </div>
+      </a>
+
+      <a href="{% url 'tournaments'%}?team=full">
+        <div class="tournament-filter-modal-content-div">
+          <img src="{% static 'img/full_icon.svg' %}" alt="open_filter_icon_no_active" class="open-filter-icon" id="OpenFilterIcon"/>
+          Full
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="last-tournaments">
+  <div class="table">
+    <div class="table-head">
+      <div class="table-head-string">
+        <div>Дисциплина</div>
+        <div>Турнир</div>
+        <div>Дата регистрации</div>
+        <div>Дата начала</div>
+        <div>Взнос</div>
+        <div></div>
+      </div>
+    </div>
+    <div class="table-body">
+      {% for tournament in tournaments%}
+      <div class="table-body-string">
+        <div>
+          <img
+            src="{{MEDIA_URL}}{{tournament.game.icon.url}}"
+            alt="game_icon"
+          />
+        </div>
+        <div>{{tournament}}</div>
+        <div>{{tournament.registration_start_date|date:"d.m.Y"}}</div>
+        <div>{{tournament.start_date|date:"d.m.Y"}}</div>
+        <div>{{tournament.price}}</div>
+        <div>
+          <a href="">
+            <button class="green-button">УЧАСТВОВАТЬ</button>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/tournaments.js' %}"></script>
+{% endblock %}
