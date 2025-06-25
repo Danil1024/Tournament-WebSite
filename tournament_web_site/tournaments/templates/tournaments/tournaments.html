@@ -115,7 +115,7 @@ Champion's Realm
         <div>{{tournament.start_date|date:"d.m.Y"}}</div>
         <div>{{tournament.price}}</div>
         <div>
-          <a href="">
+          <a href="{% url 'tournament' tournament.pk %}">
             <button class="green-button">УЧАСТВОВАТЬ</button>
           </a>
         </div>
