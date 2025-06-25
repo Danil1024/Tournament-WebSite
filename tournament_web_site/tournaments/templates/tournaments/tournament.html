@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/tournament.css' %}" />
+{% endblock %}
+
+{% block title %}
+Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class="tournament-content">
+    <div class="tournament-header">
+        <h2 class="tournament-name">{{tournament|upper}}</h2>
+        <button class="green-button">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+    </div>
+
+    <div class="tournament-params">
+        <div class="tournament-param">
+            <p class="tournament-param-name">Дата регистрации</p>
+            <p class="tournament-param-value">{{tournament.registration_start_date|date:"d.m.Y"}}</p>
+        </div>
+        <div class="tournament-param">
+            <p class="tournament-param-name">Дата начала</p>
+            <p class="tournament-param-value">{{tournament.start_date|date:"d.m.Y"}}</p>
+        </div>
+        <div class="tournament-param">
+            <p class="tournament-param-name">Тип команды</p>
+            <p class="tournament-param-value">{{tournament.get_team_size_display }}</p>
+        </div>
+        <div class="tournament-param">
+            <p class="tournament-param-name">Призовой фонд</p>
+            <p class="tournament-param-value">{{prize_fund}}</p>
+        </div>
+        <div class="tournament-param">
+            <p class="tournament-param-name">Взнос</p>
+            <p class="tournament-param-value">{{tournament.price}}</p>
+        </div>
+        <div class="tournament-param">
+            <p class="tournament-param-name">Оставшиеся места</p>
+            <p class="tournament-param-value">{{remaining_places}}</p>
+        </div>
+    </div>
+    {% comment %} <div class="tournament-description">
+        <p class="tournament-description-title">ВНИМАНИЕ ПЕРЕД РЕГИСТРАЦИЕ НА ТУРНИР, ОЗНАКОМТЕСЬ С РАЗДЕЛОМ FAQ</p>
+        <p class="tournament-description-content">
+            Мы стремимся повысить доверие к аналитике в киберспорте.
+            Наш сервис помогает командам, организаторам и спонсорам оценивать популярность киберспортивных активностей,
+            анализировать тренды и находить новые возможности для роста.
+        </p>
+    </div> {% endcomment %}
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

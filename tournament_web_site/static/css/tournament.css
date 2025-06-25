@@ -1,0 +1,95 @@
+.tournament-content {
+    margin-right: 1.3%;
+    margin-left: 1.3%;
+    min-height: 50px;
+    margin-top: 6%;
+}
+
+footer {
+  margin-top: 10%;
+}
+
+.tournament-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tournament-name {
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 50px;
+    color: #FFFFFF;
+
+    margin-bottom: 1%;
+}
+
+.tournament-params {
+    display: grid;
+    grid-template-columns: repeat(3, 20%);
+    grid-template-rows: repeat(2, 80%);
+    gap: 20px;           /* отступы между столбцами и строками */
+    justify-content: center; /* по желанию: центрировать сетку по горизонтали */
+    align-content: center;   /* центрировать сетку по вертикали */
+
+    margin-top: 7%;
+    min-height: 12vh;
+}
+.tournament-param {
+    box-sizing: border-box;
+    padding-left: 5%;
+
+    background-color: #272e39;
+    border: 0.01em solid #444a57;
+    border-radius: 0.7rem;
+
+    align-content: center;
+}
+
+.tournament-param-name {
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 280;
+    color: rgb(196, 196, 196);
+
+    margin: 0px;
+    margin-bottom: 4%;
+}
+
+.tournament-param-value {
+    font-size: 19px;
+    font-family: Inter;
+    font-weight: 330;
+    color: white;
+
+    margin: 0px;
+}
+
+/* .tournament-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 5%;
+    font-family: Inter;
+    color: white;
+}
+
+.tournament-description-title  {
+    font-size: 21px;
+    font-weight: 430;
+
+    margin-bottom: 0%;
+} */
+
+/* .tournament-description-content {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgb(196, 196, 196);
+
+    margin-top: 0.1%;
+    width: 50%;
+    text-align: center;
+} */

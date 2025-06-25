@@ -267,9 +267,19 @@ body {
   line-height: 24px;
   letter-spacing: 0.05em;
   text-align: left;
-  text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  z-index: 2;
+  text-underline-position: from-font;
+
+  /* Добавляем плавный переход для фона, цвета текста и рамки */
+  transition: 
+    background-color 0.3s,
+    color 0.3s
+}
+
+.green-button:hover {
+  /* При ховере меняем фон и цвет текста */
+  background-color: #C7F022;
+  color: #282F3A;
 }
 
 .table-body-string div:nth-child(1) {

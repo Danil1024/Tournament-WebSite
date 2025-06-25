@@ -28,7 +28,7 @@ class Tournament(models.Model):
         return f'{self.game} {self.get_team_size_display()} #{self.pk}'
     
     @classmethod
-    def get_team_size_map(cls):
+    def get_team_size_mapper(cls):
         return {label: value for value, label in cls.CHOICES_TEAM_SIZE}
     
     class Meta:
