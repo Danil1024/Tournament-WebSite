@@ -1,0 +1,185 @@
+.team-content {
+    margin-right: 10%;
+    margin-left: 10%;
+    min-height: 50px;
+    margin-top: 6%;
+}
+
+.team-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 5%;
+    padding: 30px;
+    background-color: #272e39;
+    border: 0.01em solid #444a57;
+    border-radius: 0.7rem;
+}
+
+.team-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #444a57;
+}
+
+.team-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #3a4354;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-family: Inter;
+}
+
+.team-info {
+    flex-grow: 1;
+}
+
+.team-name {
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0 0 15px 0;
+}
+
+.team-commander {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-commander .label {
+    color: rgb(196, 196, 196);
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 280;
+}
+
+.team-commander .value {
+    color: #FFFFFF;
+    font-weight: 330;
+    font-size: 16px;
+    font-family: Inter;
+}
+
+.team-actions {
+    flex-shrink: 0;
+}
+
+.green-button {
+    background-color: #c7f022;
+    color: #171b22;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-family: Inter;
+}
+
+.green-button:hover {
+    background-color: #b8e01f;
+}
+
+.green-button {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.team-details {
+    display: grid;
+    gap: 25px;
+}
+
+.team-section {
+    background-color: #272e39;
+    border: 0.01em solid #444a57;
+    border-radius: 0.7rem;
+    padding: 20px;
+}
+
+.section-title {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+}
+
+.players-list {
+    display: grid;
+    gap: 12px;
+}
+
+.player-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background-color: #3a4354;
+    border: 0.01em solid #444a57;
+    border-radius: 0.7rem;
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3a4354;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: Inter;
+    flex-shrink: 0;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.player-name {
+    font-weight: 330;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: Inter;
+}
+
+.player-role {
+    font-size: 14px;
+    color: rgb(196, 196, 196);
+    font-weight: 280;
+    font-family: Inter;
+}
+
+.no-teams-message {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 330;
+    color: #FFFFFF;
+}
+
+footer {
+    margin-top: 10%;
+}

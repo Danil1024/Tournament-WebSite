@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/team_setting.css' %}" />
+{% endblock %}
+
+{% block title %}
+Управление командой {{ team.name }} - Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class="team-setting-content">
+    <div class="team-header">
+        <div class="team-logo">
+            {% if team.logo %}
+                <img src="{{ team.logo.url }}" alt="{{ team.name }} logo" id="team-logo-preview" />
+            {% else %}
+                <div class="team-logo-placeholder" id="team-logo-preview">
+                    <span>{{ team.name|first|upper }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="team-info">
+            <h1 class="team-name" id="team-name-display">{{ team.name }}</h1>
+            <div class="team-commander">
+                <span class="label">Командир:</span>
+                <span class="value">{{ team.commander.username }}</span>
+            </div>
+        </div>
+        <div class="team-actions">
+            <a href="{% url 'team' team.slug %}" class="secondary-button">НАЗАД К КОМАНДЕ</a>
+        </div>
+    </div>
+
+    <div class="settings-sections">
+        <!-- Редактирование команды -->
+        <div class="setting-section">
+            <h2 class="section-title">Редактировать команду</h2>
+            <form method="post" enctype="multipart/form-data" class="edit-team-form" action="{% url 'edit-team' team.slug %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="team-name">Название команды:</label>
+                    <input type="text" id="team-name" name="name" value="{{ team.name }}" maxlength="20" pattern="[a-z]+(?: [a-z]+)*" required>
+                    <small>Только маленькие латинские буквы и пробелы между словами</small>
+                </div>
+                <div class="form-group">
+                    <label for="team-logo">Логотип команды:</label>
+                    <input type="file" id="team-logo" name="logo" accept="image/*">
+                    <small>Поддерживаемые форматы: JPG, PNG, GIF</small>
+                </div>
+                <button type="submit" class="green-button">СОХРАНИТЬ ИЗМЕНЕНИЯ</button>
+            </form>
+        </div>
+
+        <!-- Приглашение игроков -->
+        <div class="setting-section">
+            <h2 class="section-title">Пригласить игрока</h2>
+            <form method="post" class="invite-player-form" action="{% url 'invite-player' team.slug %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="player-username">Никнейм игрока:</label>
+                    <input type="text" id="player-username" name="player_username" placeholder="Введите никнейм" required>
+                </div>
+                <button type="submit" class="green-button">ОТПРАВИТЬ ПРИГЛАШЕНИЕ</button>
+            </form>
+        </div>
+
+        <!-- Управление составом -->
+        <div class="setting-section">
+            <h2 class="section-title">Управление составом</h2>
+            <div class="players-management">
+                {% for player in team.players.all %}
+                    <div class="player-item">
+                        <div class="player-avatar">
+                            <span>{{ player.username|first|upper }}</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name">{{ player.username }}</span>
+                            {% if player == team.commander %}
+                                <span class="player-role">Командир</span>
+                            {% else %}
+                                <span class="player-role">Игрок</span>
+                            {% endif %}
+                        </div>
+                        {% if player != team.commander %}
+                            <form method="post" class="kick-player-form" style="display: inline;" action="{% url 'kick-player' team.slug %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="player_id" value="{{ player.id }}">
+                                <button type="submit" class="red-button" onclick="return confirm('Вы уверены, что хотите исключить {{ player.username }} из команды?')">ИСКЛЮЧИТЬ</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Заявки в команду -->
+        <div class="setting-section">
+            <h2 class="section-title">Заявки в команду</h2>
+            {% if team_registration %}
+                <div class="applications-list">
+                    {% for application in team_registration %}
+                        <div class="application-item">
+                            <div class="player-avatar">
+                                <span>{{ application.player.username|first|upper }}</span>
+                            </div>
+                            <div class="application-info">
+                                <span class="player-name">{{ application.player.username }}</span>
+                                <span class="application-date">Подана: {{ application.player.date_joined|date:"d.m.Y" }}</span>
+                            </div>
+                            <div class="application-actions">
+                                <form method="post" class="application-form" style="display: inline;" action="{% url 'accept-application' team.slug %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="application_id" value="{{ application.id }}">
+                                    <button type="submit" class="green-button small">ПРИНЯТЬ</button>
+                                </form>
+                                <form method="post" class="application-form" style="display: inline;" action="{% url 'reject-application' team.slug %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="application_id" value="{{ application.id }}">
+                                    <button type="submit" class="red-button small">ОТКЛОНИТЬ</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-applications">Нет активных заявок</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Предварительный просмотр логотипа
+    const logoInput = document.getElementById('team-logo');
+    let logoPreview = document.getElementById('team-logo-preview');
+    
+    if (logoInput) {
+        logoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (logoPreview.tagName === 'IMG') {
+                        logoPreview.src = e.target.result;
+                    } else {
+                        // Заменяем placeholder на изображение
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = 'Team logo preview';
+                        logoPreview.parentNode.replaceChild(img, logoPreview);
+                        logoPreview = img;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Предварительный просмотр названия команды
+    const nameInput = document.getElementById('team-name');
+    const nameDisplay = document.getElementById('team-name-display');
+    
+    if (nameInput && nameDisplay) {
+        nameInput.addEventListener('input', function(e) {
+            const value = e.target.value;
+            if (value) {
+                nameDisplay.textContent = value;
+                // Обновляем первую букву в логотипе
+                if (logoPreview.tagName === 'DIV') {
+                    logoPreview.querySelector('span').textContent = value.charAt(0).toUpperCase();
+                }
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

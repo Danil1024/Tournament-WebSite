@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/create_team.css' %}" />
+{% endblock %}
+
+{% block title %}
+Вступить в команду - Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class="create-team-container">
+    <div class="create-team-content">
+        <h1 class="create-team-title">Вступить в команду</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="create-team-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.team_name.id_for_label }}" class="form-label">Название команды</label>
+                {{ form.team_name }}
+                {% if form.team_name.errors %}
+                    <div class="error-message">
+                        {% for error in form.team_name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="create-button">Подать заявку</button>
+                <a href="{% url 'my-teams' %}" class="cancel-button">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

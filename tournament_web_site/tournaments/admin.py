@@ -15,6 +15,7 @@ class PlayersListMixin:
 @admin.register(Team)
 class TeamAdmin(PlayersListMixin, admin.ModelAdmin):
 	list_display = ['name', 'logo', 'commander', 'players_list']
+	prepopulated_fields = {"slug": ("name",)}
 	
 @admin.register(TeamComposition)
 class TeamCompositionAdmin(PlayersListMixin, admin.ModelAdmin):

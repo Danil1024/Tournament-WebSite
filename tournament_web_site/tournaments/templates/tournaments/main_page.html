@@ -48,7 +48,7 @@ Champion's Realm
         <div>{{tournament.start_date|date:"d.m.Y"}}</div>
         <div>{{tournament.price}}</div>
         <div>
-          <a href="">
+          <a href="{% url 'tournament' tournament.pk %}">
             <button class="green-button">УЧАСТВОВАТЬ</button>
           </a>
         </div>
@@ -57,10 +57,10 @@ Champion's Realm
     </div>
   </div>
 </div>
-<div class="img-lines">
+<!-- <div class="img-lines">
   <img src="{% static 'img/lines_photos.svg' %}" class="luminosity-filter" />
-</div>
+</div> -->
 <div class="block-show-more">
-  <a href=""><button class="green-button">ПОКАЗАТЬ ЕЩЕ</button></a>
+  <a href="{% url 'tournaments' %}"><button class="green-button">ПОКАЗАТЬ ЕЩЕ</button></a>
 </div>
 {% endblock %}

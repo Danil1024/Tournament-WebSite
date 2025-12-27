@@ -1,0 +1,70 @@
+.my-teams-content {
+    margin-right: 10%;
+    margin-left: 10%;
+    min-height: 50px;
+    margin-top: 6%;
+}
+
+.table-head-string div:nth-child(1) {
+  width: 15%;
+}
+
+.table-head-string div:nth-child(2) {
+  width: 25%;
+}
+
+.table-head-string div:nth-child(3) {
+  width: 40%;
+}
+
+.table-head-string div:nth-child(4) {
+  width: 20%;
+}
+
+
+.table-body-string div:nth-child(1) {
+  width: 15%;
+}
+
+.table-body-string div:nth-child(2) {
+  width: 25%;
+}
+
+.table-body-string div:nth-child(3) {
+  width: 40%;
+}
+
+.table-body-string div:nth-child(4) {
+  width: 20%;
+}
+
+.no-teams-message {
+  background-color: #3a43544d;
+  border-radius: 20px;
+  border: 0.5px solid #7789ab;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-teams-message p {
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 24px;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.command-creation-button {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
