@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/team.css' %}" />
+{% endblock %}
+
+{% block title %}
+{{ team.name }} - Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class="team-content">
+    <div class="team-header">
+        <div class="team-logo">
+            {% if team.logo %}
+                <img src="{{ team.logo.url }}" alt="{{ team.name }} logo" />
+            {% else %}
+                <div class="team-logo-placeholder">
+                    <span>{{ team.name|first|upper }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="team-info">
+            <h1 class="team-name">{{ team.name }}</h1>
+            <div class="team-commander">
+                <span class="label">Командир:</span>
+                <span class="value">{{ team.commander.username }}</span>
+            </div>
+        </div>
+        {% if user == team.commander %}
+            <div class="team-actions">
+                <a href="{% url 'team-setting' team.slug %}" class="green-button">РЕДАКТИРОВАТЬ</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="team-details">
+        <div class="team-section">
+            <h2 class="section-title">Игроки команды</h2>
+            <div class="players-list">
+                {% for player in team.players.all %}
+                    <div class="player-item">
+                        <div class="player-avatar">
+                            <span>{{ player.username|first|upper }}</span>
+                        </div>
+                        <div class="player-info">
+                            <span class="player-name">{{ player.username }}</span>
+                            {% if player == team.commander %}
+                                <span class="player-role">Командир</span>
+                            {% else %}
+                                <span class="player-role">Игрок</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% comment %} <div class="team-section">
+            <h2 class="section-title">Статистика команды</h2>
+            <div class="team-stats"></div>
+        </div> {% endcomment %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

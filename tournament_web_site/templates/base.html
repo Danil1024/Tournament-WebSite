@@ -26,7 +26,7 @@
     </title>
   </head>
   <body>
-    <div class="sidebar"></div>
+    <!-- <div class="sidebar"></div> -->
     <div class="content">
       <header class="header">
         <div class="header-left">
@@ -35,7 +35,7 @@
             <ul>
               <li><a class="nav-a" href="{% url 'main_page' %}">Главная</a></li>
               <li><a class="nav-a" href="{% url 'tournaments' %}">Турниры</a></li>
-              <li><a class="nav-a" href="#">Дисциплины</a></li>
+              <li><a class="nav-a" href="{% url 'my-teams' %}">Команды</a></li>
               <li><a class="nav-a" href="#">О нас</a></li>
             </ul>
           </nav>
@@ -73,6 +73,16 @@
         </div>
       </header>
       <main>
+        {% if messages %}
+          <div class="messages-container">
+            {% for message in messages %}
+              <div class="message message-{{ message.tags }}">
+                {{ message }}
+                <button class="message-close" onclick="this.parentElement.remove()">&times;</button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
         {% block content %}
         <!-- Содержимое страницы -->
         {% endblock %}
@@ -91,8 +101,9 @@
         <div class="footer-nav">
           <h2>Навигация</h2>
           <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="#">Турниры</a></li>
+            <li><a href="{% url 'main_page' %}">Главная</a></li>
+            <li><a href="{% url 'tournaments' %}">Турниры</a></li>
+            <li><a href="{% url 'my-teams' %}">Команды</a></li>
           </ul>
         </div>
 
@@ -117,7 +128,7 @@
         </div>
       </footer>
     </div>
-    <div class="sidebar"></div>
+    <!-- <div class="sidebar"></div> -->
     <script src="{% static 'js/main_page.js' %}"></script>
     {% block js %}
       <!-- подключаем js страницы -->

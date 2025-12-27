@@ -1,0 +1,166 @@
+.create-team-container {
+    margin: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.create-team-content {
+    background-color: #3a4354;
+    border-radius: 20px;
+    border: 0.5px solid #7789ab;
+    padding: 40px;
+}
+
+.create-team-title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Manrope', sans-serif;
+    line-height: 85px;
+}
+
+.create-team-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-label {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.6px;
+}
+
+.form-group input[type="text"] {
+    padding: 17px 20px;
+    border: 0.5px solid #7789ab;
+    border-radius: 11.5px;
+    background-color: #272e39;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.6px;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #c7f022;
+}
+
+.form-group input[type="text"]::placeholder {
+    color: #7789ab;
+}
+
+.form-group input[type="file"] {
+    padding: 17px 20px;
+    border: 0.5px solid #7789ab;
+    border-radius: 11.5px;
+    background-color: #272e39;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.6px;
+}
+
+.form-group input[type="file"]:focus {
+    outline: none;
+    border-color: #c7f022;
+}
+
+.error-message {
+    background-color: rgba(244, 67, 54, 0.1);
+    border: 0.5px solid rgba(244, 67, 54, 0.3);
+    border-radius: 11.5px;
+    padding: 10px 15px;
+    margin-top: 5px;
+}
+
+.error-message p {
+    color: #f44336;
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+}
+
+.form-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.create-button {
+    background-color: #c7f022;
+    border: none;
+    border-radius: 20px;
+    color: #272e39;
+    padding: 12px 38px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #367c39;
+}
+
+.cancel-button {
+    background-color: #7789ab;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    padding: 12px 38px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #6a7a9a;
+}
+
+@media (max-width: 768px) {
+    .create-team-container {
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .create-team-content {
+        padding: 30px 25px;
+    }
+    
+    .create-team-title {
+        font-size: 24px;
+        line-height: 60px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .create-button,
+    .cancel-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}

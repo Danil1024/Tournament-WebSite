@@ -5,6 +5,8 @@ from datetime import timedelta
 from django.utils import timezone
 from django.db.models import F, Q
 from django.db.models.constraints import CheckConstraint
+from django.core.validators import RegexValidator
+from django.utils.text import slugify
 
 
 class Tournament(models.Model):
@@ -62,14 +64,27 @@ class Tournament(models.Model):
         ]
 
 class Team(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=100)
+    latin_validator = RegexValidator(
+        regex=r'^[a-z]+(?: [a-z]+)*$',
+        message='Название команды может содержать только маленькие латинские буквы и одиночные пробелы между словами'
+    )
+    
+    name = models.CharField(verbose_name='Название', max_length=20, validators=[latin_validator], unique=True)
     logo = models.ImageField(upload_to='logo/', verbose_name='Логотип', blank=True, null=True)
     commander = models.ForeignKey(get_user_model(), verbose_name='Командир', on_delete=models.CASCADE, related_name='commander')
     players = models.ManyToManyField(get_user_model(), verbose_name='Игроки команды', related_name='team_players')
+    slug = models.SlugField(unique=True)
 
+    def save(self, *args, **kwargs):
+        if self.name:
+            self.name = ' '.join(self.name.split())
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+    
     def __str__(self):
         return f'{self.name}'
-    
+
     class Meta:
         verbose_name = 'Команда'
         verbose_name_plural = 'Команды'
@@ -94,17 +109,18 @@ class TeamResult(models.Model):
 
 class TeamRegistration(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'В ожидании'),
+        ('pending', 'В обработке'),
         ('accepted', 'Принято'),
         ('rejected', 'Отклонено'),
     ]
     team = models.ForeignKey(Team, verbose_name='Команда', on_delete=models.CASCADE)
     player = models.ForeignKey(get_user_model(), verbose_name='Игрок', on_delete=models.CASCADE)
-    status = models.CharField(verbose_name='Статус', max_length=20, choices=STATUS_CHOICES)
+    status = models.CharField(verbose_name='Статус', max_length=20, choices=STATUS_CHOICES, default='pending')
     
     class Meta:
         verbose_name = 'Заявка в команду'
         verbose_name_plural = 'Заявки в команды'
+        unique_together = ['team', 'player']
 
 class TournamentRegistration(models.Model):
     STATUS_CHOICES = (

@@ -91,6 +91,7 @@ Champion's Realm
 </div>
 <div class="last-tournaments">
   <div class="table">
+    {% if tournaments %}
     <div class="table-head">
       <div class="table-head-string">
         <div>Дисциплина</div>
@@ -122,6 +123,11 @@ Champion's Realm
       </div>
       {% endfor %}
     </div>
+    {% else %}
+    <div class="no-teams-message">
+      <p>Таких турниров не найдено</p>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

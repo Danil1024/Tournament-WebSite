@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/my_teams.css' %}" />
+{% endblock %}
+
+{% block title %}
+Champion's Realm
+{% endblock %}
+
+{% block content %}
+<div class="my-teams-content">
+    {% if user.is_authenticated %}
+        {% if my_teams %}
+            <div class="table-head">
+                <div class="table-head-string">
+                <div>Навзание</div>
+                <div>Командир</div>
+                <div>Участники</div>
+                <div></div>
+                </div>
+            </div>
+            
+            <div class="table-body">
+                {% for my_team in my_teams %}
+                    <div class="table-body-string">
+                        <div>{{ my_team.name }}</div>
+                        <div>{{ my_team.commander }}</div>
+                        <div>
+                            {% for player in my_team.players.all %}
+                                {{ player.username }}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <a href="{% url 'team' my_team.slug %}">
+                            <button class="green-button">ОТКРЫТЬ</button>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-teams-message">
+                <p>У вас пока нет команд. Вы можете создать свою команду или присоединиться к уже существующей команде.</p>
+            </div>
+        {% endif %}
+
+        <div class="command-creation-button">
+            <a href="{% url 'create-team' %}">
+            <button class="green-button">СОЗДАТЬ КОМАНДУ</button>
+            </a>
+            <a href="{% url 'join-team' %}">
+            <button class="green-button">ВСТУПИТЬ В КОМАНДУ</button>
+            </a>
+        </div>
+    {% else %}
+    <div class="no-teams-message">
+        <p>Для доступа к командам вам нужно создать аккаунт или войти в него</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
