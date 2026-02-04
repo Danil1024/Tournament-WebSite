@@ -13,8 +13,33 @@ Champion's Realm
 <div class="tournament-content">
     <div class="tournament-header">
         <h2 class="tournament-name">{{tournament|upper}}</h2>
-        <button class="green-button">ЗАРЕГИСТРИРОВАТЬСЯ</button>
     </div>
+    {% if my_teams %}
+    <div class="registration-form" data-register-url="{% url 'register-for-tournament' tournament.pk %}">
+        <div class="form-group">
+            <label for="team-select" class="form-label">Выберите команду</label>
+            <select id="team-select" class="form-select">
+                <option value="">— Выберите команду —</option>
+                {% for team in my_teams %}
+                <option value="{{ team.id }}">{{ team.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group roster-section" id="roster-section" hidden>
+            <label class="form-label">
+                Выберите состав (<span id="roster-count">0</span>/<span id="roster-max">{{ tournament.team_size }}</span>)
+            </label>
+            <p class="roster-hint">Кликните по участникам, чтобы добавить их в состав</p>
+            <div class="roster-players-list" id="roster-players-list"></div>
+        </div>
+        <div class="registration-form-actions">
+            <button class="green-button">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+        </div>
+    </div>
+    {{ teams_config|json_script:"teams-data" }}
+    {% else %}
+    <p class="registration-empty-message">Для участия вам нужно создать команду или вступить в нее</p>
+    {% endif %}
 
     <div class="tournament-params">
         <div class="tournament-param">
@@ -42,16 +67,11 @@ Champion's Realm
             <p class="tournament-param-value">{{remaining_places}}</p>
         </div>
     </div>
-    {% comment %} <div class="tournament-description">
-        <p class="tournament-description-title">ВНИМАНИЕ ПЕРЕД РЕГИСТРАЦИЕ НА ТУРНИР, ОЗНАКОМТЕСЬ С РАЗДЕЛОМ FAQ</p>
-        <p class="tournament-description-content">
-            Мы стремимся повысить доверие к аналитике в киберспорте.
-            Наш сервис помогает командам, организаторам и спонсорам оценивать популярность киберспортивных активностей,
-            анализировать тренды и находить новые возможности для роста.
-        </p>
-    </div> {% endcomment %}
 </div>
 {% endblock %}
 
 {% block js %}
+{% if my_teams %}
+<script src="{% static 'js/tournament_registration.js' %}"></script>
+{% endif %}
 {% endblock %}

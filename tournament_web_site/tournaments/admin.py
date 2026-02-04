@@ -19,7 +19,7 @@ class TeamAdmin(PlayersListMixin, admin.ModelAdmin):
 	
 @admin.register(TeamComposition)
 class TeamCompositionAdmin(PlayersListMixin, admin.ModelAdmin):
-	list_display = ['team', 'players_list', 'tournament']
+	list_display = ['team', 'players_list']
 
 @admin.register(Tournament)
 class TournamentAdmin(admin.ModelAdmin):

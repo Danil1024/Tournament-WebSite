@@ -2,13 +2,16 @@ from django.urls import path
 from .views import (
     MainPage, TournamentsPage, TournamentPage, MyTeams, TeamPage, 
     CreateTeamView, JoinTeamView, SettingTeamView, EditTeamView, 
-    InvitePlayerView, KickPlayerView, AcceptApplicationView, RejectApplicationView
+    InvitePlayerView, KickPlayerView, AcceptApplicationView,
+    RejectApplicationView, RegisterForTournamentView
 )
 
 urlpatterns = [
     path("", MainPage.as_view(), name="main_page"),
     path("tournaments/", TournamentsPage.as_view(), name="tournaments"),
     path('tournament/<int:pk>/', TournamentPage.as_view(), name='tournament'),
+    path("tournament/<int:pk>/register/", RegisterForTournamentView.as_view(), name="register-for-tournament"),
+    
     path("my-teams/", MyTeams.as_view(), name="my-teams"),
     path("team/<slug:slug>/", TeamPage.as_view(), name="team"),
     path("create-team/", CreateTeamView.as_view(), name="create-team"),
