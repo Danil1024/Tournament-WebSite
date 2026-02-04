@@ -11,12 +11,19 @@ from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
-from .models import Tournament, TournamentRegistration, Team, TeamRegistration
+from .models import Tournament, TournamentRegistration, Team, TeamRegistration, TeamComposition
+from .services.registration import TournamentRegistrationService
 from .forms import JoinTeamForm
 from games.models import Game
-from datetime import datetime
 from django.db.models import Q
+from django.core.exceptions import ValidationError
 
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+
+from datetime import datetime
 import re
 
 
@@ -96,10 +103,62 @@ class TournamentPage(DetailView):
         prize_fund = int(tournament.price) * len(Tournament_registrations)
         remaining_places = int(tournament.maximum_number_of_teams) - len(Tournament_registrations)
 
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            comands = Team.objects.filter(commander=user).prefetch_related('players')
+        else:
+            comands = Team.objects.none()
+
+        teams_data = {}
+        commanders_data = {}
+
+        for team in comands:
+            team_id = str(team.id)
+            players = []
+            for player in team.players.all():
+                players.append({'id': player.id, 'username': player.username})
+            teams_data[team_id] = players
+            commanders_data[team_id] = team.commander_id
+
+        teams_config = {
+            'max_roster_size': int(tournament.team_size),
+            'teams': teams_data,
+            'commanders': commanders_data,
+        }
+
         context['prize_fund'] = prize_fund
         context['remaining_places'] = remaining_places
+        context['my_teams'] = comands
+        context['teams_config'] = teams_config
 
         return context
+
+
+class RegisterForTournamentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        tournament = get_object_or_404(Tournament, pk=pk)
+        data = request.data
+        team_id = data.get('team_id')
+        roster = data.get('roster')
+        
+        team = get_object_or_404(Team, pk=team_id)
+        players = get_user_model().objects.filter(id__in=roster)
+
+        registration_service = TournamentRegistrationService(
+            tournament=tournament,
+            team=team,
+            players=players,
+            user=request.user
+        )
+        try:
+            registration_service.register()
+        except ValidationError as e:
+            return Response({'error': e.message}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'message': 'Заявка на турнир успешно подана'}, status=status.HTTP_201_CREATED)
+
 
 class MyTeams(ListView):
     model = Team

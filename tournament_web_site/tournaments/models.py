@@ -92,7 +92,6 @@ class Team(models.Model):
 class TeamComposition(models.Model):
     team = models.ForeignKey(Team, verbose_name='Команда', on_delete=models.CASCADE)
     players = models.ManyToManyField(get_user_model(), verbose_name='Игроки состава', related_name='team_composition_players')
-    tournament = models.ForeignKey(Tournament, verbose_name='Турнир', blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Состав команды'
@@ -129,7 +128,7 @@ class TournamentRegistration(models.Model):
         ('payment_failed', 'оплата не прошла')
     )
     tournament = models.ForeignKey(Tournament, verbose_name='Турнир', on_delete=models.CASCADE)
-    team_composition = models.OneToOneField(Team, verbose_name='Состав команды', on_delete=models.CASCADE)
+    team_composition = models.OneToOneField(TeamComposition, verbose_name='Состав команды', on_delete=models.CASCADE)
     date = models.DateTimeField(verbose_name='Дата подачи заявки', auto_now_add=True)
     status = models.CharField(verbose_name='Статус', max_length=20, choices=STATUS_CHOICES)
     

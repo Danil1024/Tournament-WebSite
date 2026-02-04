@@ -1,15 +1,10 @@
+/* Layout */
 .tournament-content {
-    margin-right: 1.3%;
-    margin-left: 1.3%;
+    margin: 6% 1.3% 0;
     min-height: 50px;
-    margin-top: 6%;
 }
 
-footer {
-  margin-top: 10%;
-}
-
-.tournament-header{
+.tournament-header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,30 +15,28 @@ footer {
     font-family: Inter;
     font-weight: 600;
     font-size: 50px;
-    color: #FFFFFF;
-
+    color: #fff;
     margin-bottom: 1%;
 }
 
+/* Tournament params grid */
 .tournament-params {
     display: grid;
     grid-template-columns: repeat(3, 20%);
     grid-template-rows: repeat(2, 80%);
-    gap: 20px;           /* отступы между столбцами и строками */
-    justify-content: center; /* по желанию: центрировать сетку по горизонтали */
-    align-content: center;   /* центрировать сетку по вертикали */
-
+    gap: 20px;
+    justify-content: center;
+    align-content: center;
     margin-top: 7%;
     min-height: 12vh;
 }
+
 .tournament-param {
     box-sizing: border-box;
     padding-left: 5%;
-
     background-color: #272e39;
     border: 0.01em solid #444a57;
     border-radius: 0.7rem;
-
     align-content: center;
 }
 
@@ -52,44 +45,114 @@ footer {
     font-family: Inter;
     font-weight: 280;
     color: rgb(196, 196, 196);
-
-    margin: 0px;
-    margin-bottom: 4%;
+    margin: 0 0 4% 0;
 }
 
 .tournament-param-value {
     font-size: 19px;
     font-family: Inter;
     font-weight: 330;
-    color: white;
-
-    margin: 0px;
+    color: #fff;
+    margin: 0;
 }
 
-/* .tournament-description {
+/* Registration form */
+.registration-empty-message,
+.registration-form {
+    margin: 4% auto 0;
+    padding: 1.5rem 2rem;
+    max-width: 500px;
+    background-color: #272e39;
+    border: 1px solid #444a57;
+    border-radius: 0.7rem;
+}
+
+.registration-empty-message {
+    font-family: Inter;
+    font-size: 16px;
+    color: rgb(196, 196, 196);
+    text-align: center;
+}
+
+.registration-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.registration-form .form-label {
+    display: block;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(196, 196, 196);
+    margin-bottom: 0.5rem;
+}
+
+.registration-form .form-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: Inter;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1a1f26;
+    border: 1px solid #444a57;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.registration-form .form-select:focus {
+    outline: none;
+    border-color: #c7f022;
+}
+
+.roster-hint {
+    font-size: 12px;
+    color: rgb(150, 150, 150);
+    margin: 0 0 0.75rem 0;
+}
+
+.roster-players-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.roster-player-item {
+    padding: 0.5rem 1rem;
+    font-family: Inter;
+    font-size: 14px;
+    color: #fff;
+    background-color: #1a1f26;
+    border: 2px solid #444a57;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.roster-player-item:hover {
+    border-color: #7789ab;
+    background-color: #272e39;
+}
+
+.roster-player-item.selected {
+    border-color: #c7f022;
+    background-color: rgba(199, 240, 34, 0.15);
+    color: #c7f022;
+}
+
+.roster-player-item.commander {
+    cursor: default;
+}
+
+.roster-player-item.commander:hover {
+    border-color: #c7f022;
+}
+
+.registration-form-actions {
+    margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    margin-top: 5%;
-    font-family: Inter;
-    color: white;
 }
 
-.tournament-description-title  {
-    font-size: 21px;
-    font-weight: 430;
-
-    margin-bottom: 0%;
-} */
-
-/* .tournament-description-content {
-    font-size: 16px;
-    font-weight: 300;
-    color: rgb(196, 196, 196);
-
-    margin-top: 0.1%;
-    width: 50%;
-    text-align: center;
-} */
+footer {
+    margin-top: 10%;
+}
